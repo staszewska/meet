@@ -134,3 +134,9 @@ Show a chart with the number of upcoming events in each city.
 - Given the user is viewing the event details;
 - When the user navigates to the charts section;
 - Then a chart displaying the number of upcoming events in each city should be shown.
+
+## Serverless Functions in the Meet App
+
+In the Meet app, serverless functions are essential for managing authorization to access public calendar events from the Google Calendar API. To display these events in the React app, users must be authorized to fetch the event data. Instead of maintaining a full server, serverless functions efficiently handle this authorization process.
+
+These functions generate and provide access tokens, ensuring secure access to the Google Calendar API. By using AWS Lambda as the cloud service provider, the app benefits from a scalable and cost-effective architecture. This setup simplifies authorization while maintaining security and efficiency.
