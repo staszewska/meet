@@ -51,7 +51,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "babel-plugin-polyfill-corejs2": "^0.4.11",
     "gh-pages": "^6.1.1",
     "http-server": "^14.1.1"
   }
 }
+
+
