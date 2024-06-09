@@ -2,6 +2,6 @@
   "presets": ["react-app"],
   "plugins": [
     "@babel/plugin-proposal-private-property-in-object",
-    "babel-plugin-polyfill-corejs2"
+    ["polyfill-corejs2", { "method": "usage-global" }]
   ]
 }
