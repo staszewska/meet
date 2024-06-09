@@ -51,10 +51,7 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url =
-      "https://xyu8ad23ra.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url" +
-      "/" +
-      token;
+    const url = "https://accounts.google.com/o/oauth2/auth" + "/" + token;
     const response = await fetch(url);
     const result = await response.json();
     if (result) {
