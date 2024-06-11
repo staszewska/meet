@@ -7,4 +7,4 @@ Feature: Specify Number of Events
   Scenario: User can change the number of events displayed
     Given the user opens the events app
     When the user selects a different number of events to display
-    Then the number of events displayed should match the user's selection
+    Then the number of events displayed should match the user`s selection
