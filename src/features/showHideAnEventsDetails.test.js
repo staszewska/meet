@@ -1,5 +1,6 @@
 import { loadFeature, defineFeature } from "jest-cucumber";
-import { render, within, waitFor } from "@testing-library/react";
+import { render, within, waitFor, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "../App";
 
 const feature = loadFeature("./src/features/showHideAnEventsDetails.feature");
@@ -22,7 +23,7 @@ defineFeature(feature, (test) => {
       });
 
       const details = AppDOM.querySelector(".details");
-      console.log(details);
+      // console.log(details);
       expect(details).not.toBeInTheDocument();
     });
   });
@@ -32,11 +33,36 @@ defineFeature(feature, (test) => {
     when,
     then,
   }) => {
-    given("the user opens the events app", () => {});
+    let AppComponent;
+    let AppDOM;
 
-    when("the user clicks on an event element", () => {});
+    given("the user opens the events app", async () => {
+      AppComponent = render(<App />);
+    });
 
-    then("the event element should expand to show the event details", () => {});
+    when("the user clicks on an event element", async () => {
+      AppDOM = AppComponent.container.firstChild;
+
+      await waitFor(() => {
+        const eventList = within(AppDOM).queryAllByRole("listitem");
+        // console.log("eventList:", eventList);
+      });
+
+      const EventToggleButtons = AppComponent.queryAllByText("Show Details");
+      // console.log("buttons:", EventToggleButtons);
+      const Button = EventToggleButtons[0];
+      // console.log("button to click:", Button);
+      await userEvent.click(Button);
+    });
+
+    then(
+      "the event element should expand to show the event details",
+      async () => {
+        const details = AppDOM.querySelector(".details");
+        // console.log(details);
+        expect(details).toBeInTheDocument();
+      }
+    );
   });
 
   test("User can collapse an event to hide its details", ({
@@ -44,16 +70,42 @@ defineFeature(feature, (test) => {
     when,
     then,
   }) => {
+    let AppComponent;
+    let AppDOM;
+
     given(
       "the user has expanded an event element to see its details",
-      () => {}
+      async () => {
+        AppComponent = render(<App />);
+        AppDOM = AppComponent.container.firstChild;
+
+        await waitFor(() => {
+          const eventList = within(AppDOM).queryAllByRole("listitem");
+          // console.log("eventList:", eventList);
+        });
+
+        const EventToggleButtons = AppComponent.queryAllByText("Show Details");
+        // console.log("buttons:", EventToggleButtons);
+        const Button = EventToggleButtons[0];
+        // console.log("button to click:", Button);
+        await userEvent.click(Button);
+
+        const details = AppDOM.querySelector(".details");
+        // console.log(details);
+        expect(details).toBeInTheDocument();
+      }
     );
 
-    when("the user clicks on the expanded event element", () => {});
+    when("the user clicks on the expanded event element", async () => {
+      const EventCollapseButton = AppComponent.queryByText("Hide Details");
+      // console.log("buttons:", EventCollapseButton);
+      await userEvent.click(EventCollapseButton);
+    });
 
-    then(
-      "the event element should collapse to hide the event details",
-      () => {}
-    );
+    then("the event element should collapse to hide the event details", () => {
+      const details = AppDOM.querySelector(".details");
+      // console.log(details);
+      expect(details).not.toBeInTheDocument();
+    });
   });
 });
