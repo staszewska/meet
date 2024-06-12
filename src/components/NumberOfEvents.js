@@ -1,8 +1,19 @@
-const NumberOfEvents = ({ setCurrentNOE }) => {
-  const handleInputChanged = (event) => {
-    const value = event.target.value;
+import React, { useState } from "react";
 
-    setCurrentNOE(value);
+const NumberOfEvents = ({ setCurrentNOE }) => {
+  const [value, setValue] = useState(32);
+
+  const handleInputChanged = (event) => {
+    const newValue = event.target.value;
+
+    if (!isNaN(newValue) && newValue !== "") {
+      setValue(Number(newValue));
+      setCurrentNOE(Number(newValue));
+    } else {
+      // Handle empty input to avoid uncontrolled behavior
+      setValue(0);
+      setCurrentNOE(0);
+    }
   };
 
   return (
@@ -12,8 +23,8 @@ const NumberOfEvents = ({ setCurrentNOE }) => {
         type="number"
         id="number-of-events-input"
         className="number-of-events-input"
-        defaultValue={32}
         onChange={handleInputChanged}
+        value={value}
       />
     </div>
   );
