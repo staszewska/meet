@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 
-describe.skip("show/hide an event details", () => {
+describe("show/hide an event details", () => {
   let browser;
   let page;
   beforeAll(async () => {
@@ -38,7 +38,7 @@ describe.skip("show/hide an event details", () => {
   });
 });
 
-describe.skip("Filter events by city", () => {
+describe("Filter events by city", () => {
   let browser;
   let page;
 
