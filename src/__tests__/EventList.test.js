@@ -1,7 +1,6 @@
 import { render, within, waitFor } from "@testing-library/react";
 import EventList from "../components/EventList";
 import { getEvents } from "../api";
-import { act } from "react";
 import App from "../App";
 
 describe("<EventList /> component", () => {
@@ -16,9 +15,7 @@ describe("<EventList /> component", () => {
 
   test("renders correct number of events", async () => {
     const allEvents = await getEvents();
-    act(() => {
-      EventListComponent.rerender(<EventList events={allEvents} />);
-    });
+    EventListComponent.rerender(<EventList events={allEvents} />);
     expect(EventListComponent.getAllByRole("listitem")).toHaveLength(
       allEvents.length
     );
@@ -27,11 +24,7 @@ describe("<EventList /> component", () => {
 
 describe("<EventList /> integration", () => {
   test("renders a list of 32 events when the app is mounted and rendered", async () => {
-    let AppComponent;
-    await act(async () => {
-      // Wrap the rendering and async operations in act
-      AppComponent = render(<App />);
-    });
+    const AppComponent = render(<App />);
     const AppDOM = AppComponent.container.firstChild;
     const EventListDOM = AppDOM.querySelector("#event-list");
     await waitFor(() => {
