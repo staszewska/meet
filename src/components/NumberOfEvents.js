@@ -11,7 +11,7 @@ const NumberOfEvents = ({ setCurrentNOE }) => {
       setCurrentNOE(Number(newValue));
     } else {
       // Handle empty input to avoid uncontrolled behavior
-      setValue(0);
+      setValue(newValue);
       setCurrentNOE(0);
     }
   };
