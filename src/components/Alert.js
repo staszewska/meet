@@ -9,17 +9,18 @@ class Alert extends Component {
 
   getStyle = () => {
     return {
-      colors: this.color,
+      color: this.color,
       backgroundColor: this.bgColor,
-      borderWidth: "2px",
+      borderWidth: "1px",
       borderStyle: "solid",
-      fontWeight: "bolder",
-      borderRadius: "7px",
+      fontWeight: "bold",
+      borderRadius: "12px",
       borderColor: this.color,
       textAlign: "center",
-      fontSize: "12px",
-      margin: "10px 0",
-      padding: "10px",
+      fontSize: "14px",
+      margin: "15px 0",
+      padding: "15px",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     };
   };
 
@@ -40,4 +41,12 @@ class InfoAlert extends Alert {
   }
 }
 
-export { InfoAlert };
+class ErrorAlert extends Alert {
+  constructor(props) {
+    super(props);
+    this.color = "black";
+    this.bgColor = "#F08080";
+  }
+}
+
+export { InfoAlert, ErrorAlert };
