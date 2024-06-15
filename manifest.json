@@ -11,8 +11,8 @@
     {
       "src": "meet-app-144.png",
       "type": "image/png",
-      "sizes": "144x144",
-      "purpose": "any"
+      "sizes": "144x144"
+      // "purpose": "any"
     },
     {
       "src": "meet-app-192.png",
@@ -27,7 +27,7 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
