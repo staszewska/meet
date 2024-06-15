@@ -4,15 +4,15 @@
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "48x48",
       "type": "image/x-icon",
+      "sizes": "48x48",
       "purpose": "maskable"
     },
     {
       "src": "meet-app-144.png",
       "type": "image/png",
-      "sizes": "144x144"
-      // "purpose": "any"
+      "sizes": "144x144",
+      "purpose": "any"
     },
     {
       "src": "meet-app-192.png",
