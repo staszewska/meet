@@ -14,10 +14,7 @@ export const extractLocations = (events) => {
   return locations;
 };
 
-/**
- *
- * This function will fetch the list of all events
- */
+// checkToken function
 
 const checkToken = async (accessToken) => {
   const response = await fetch(
@@ -26,6 +23,8 @@ const checkToken = async (accessToken) => {
   const result = await response.json();
   return result;
 };
+
+//removeQuery
 
 const removeQuery = () => {
   let newurl;
@@ -42,9 +41,16 @@ const removeQuery = () => {
   }
 };
 
+// fetch the list of all events
 export const getEvents = async () => {
   if (window.location.href.startsWith("http://localhost")) {
     return mockData;
+  }
+
+  if (!navigator.onLine) {
+    const events = localStorage.getItem("lastEvents");
+    // NProgress.done();
+    return events ? JSON.parse(events) : [];
   }
 
   const token = await getAccessToken();
@@ -57,11 +63,14 @@ export const getEvents = async () => {
     const response = await fetch(url);
     const result = await response.json();
     if (result) {
+      // NProgress.done();
+      localStorage.setItem("lastEvents", JSON.stringify(result.events));
       return result.events;
     } else return null;
   }
 };
 
+//getting access token
 export const getAccessToken = async () => {
   const accessToken = localStorage.getItem("access_token");
 
