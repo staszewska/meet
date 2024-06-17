@@ -17,7 +17,7 @@ const CityEventsChart = ({ allLocations, events }) => {
   }, [`${events}`]);
 
   const getData = () => {
-    console.log("allLocactions: ", allLocations);
+    // console.log("allLocactions: ", allLocations);
 
     const data = allLocations.map((location) => {
       const count = events.filter(
