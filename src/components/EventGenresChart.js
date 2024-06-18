@@ -1,11 +1,12 @@
 import { render } from "@testing-library/react";
 import { useState, useEffect } from "react";
-import { ResponsiveContainer, PieChart, Pie, Legend } from "recharts";
+import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 
 const EventGenresChart = ({ events }) => {
   const [data, setData] = useState([]);
 
   const genres = ["React", "JavaScript", "Node", "jQuery", "Angular"];
+  const colors = ["#08d7ff", "#ff92f4", "#ffc297", "#fffb910", "#aefff6"];
 
   const getData = () => {
     // console.log("allLocactions: ", allLocations);
@@ -60,7 +61,12 @@ const EventGenresChart = ({ events }) => {
           labelLine={false}
           label={renderCustomizedLabel}
           outerRadius={130}
-        />
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+          ))}
+        </Pie>
+        <Legend verticalAlign="top" height={36} />
       </PieChart>
     </ResponsiveContainer>
   );
